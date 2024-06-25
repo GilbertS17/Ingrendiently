@@ -1,4 +1,4 @@
-import { FlatList } from "react-native";
+import { FlatList, StyleSheet, Platform, View } from "react-native";
 import { CATEGORIES } from "../data/dummy-data";
 import CategoryGridTile from "../components/CategoryGridTile";
 
@@ -9,11 +9,24 @@ function renderCategoryItem(itemData) {
 }
 
 export default function CategoriesScreen() {
+  const numColumns = 2;
+  const key = `flatlist-${numColumns}`;
+
   return (
-    <FlatList
-      data={CATEGORIES}
-      keyExtractor={(item) => item.id}
-      renderItem={renderCategoryItem}
-    />
+    <View style={styles.screen}>
+      <FlatList
+        data={CATEGORIES}
+        keyExtractor={(item) => item.id}
+        renderItem={renderCategoryItem}
+        numColumns={numColumns}
+        key={key}
+      />
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  screen: {
+    marginTop: Platform.OS === "android" ? 40 : 0, // for android notch
+  },
+});
