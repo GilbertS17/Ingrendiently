@@ -1,10 +1,11 @@
 import { View, Text, StyleSheet } from "react-native";
-import { MEALS } from "../data/dummy-data";
 
-export default function MealsOverviewScreen() {
+export default function MealsOverviewScreen({ route }) {
+  const catId = route.params.categoryId;
+
   return (
     <View style={styles.constainer}>
-      <Text>Meals Overview Screen</Text>
+      <Text>Meals Overview Screen - {catId}</Text>
     </View>
   );
 }

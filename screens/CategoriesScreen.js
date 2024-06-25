@@ -1,12 +1,13 @@
 import { FlatList, StyleSheet, Platform, View } from "react-native";
 import { CATEGORIES } from "../data/dummy-data";
 import CategoryGridTile from "../components/CategoryGridTile";
-import MealsOverviewScreen from "./MealsOverviewScreen";
 
 export default function CategoriesScreen({ navigation }) {
   function renderCategoryItem(itemData) {
     function pressHandler() {
-      navigation.navigate("MealsOverview");
+      navigation.navigate("MealsOverview", {
+        categoryId: itemData.item.id,
+      });
     }
 
     return (
