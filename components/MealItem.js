@@ -6,6 +6,7 @@ import {
   Platform,
   Image,
 } from "react-native";
+import MealDetails from "./MealDetails";
 
 export default function MealItem({
   title,
@@ -13,6 +14,7 @@ export default function MealItem({
   duration,
   complexity,
   affordability,
+  onPress,
 }) {
   return (
     <View style={styles.gridItem}>
@@ -22,16 +24,16 @@ export default function MealItem({
           pressed ? styles.buttonPressed : null,
         ]}
         android_ripple={{ color: "#ccc" }}
-        // onPress={onPress}
+        onPress={onPress}
       >
         <View style={styles.innerContainer}>
           <Image source={{ uri: imageUrl }} style={styles.image} />
           <Text style={styles.title}>{title}</Text>
-          <View style={styles.info}>
-            <Text>{duration}m </Text>
-            <Text>{complexity.toUpperCase()} </Text>
-            <Text>{affordability.toUpperCase()} </Text>
-          </View>
+          <MealDetails
+            affordability={affordability}
+            complexity={complexity}
+            duration={duration}
+          />
         </View>
       </Pressable>
     </View>
@@ -62,6 +64,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 8,
+    backgroundColor: "#e2b497",
   },
   title: {
     paddingTop: 10,
