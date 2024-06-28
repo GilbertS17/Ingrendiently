@@ -1,8 +1,10 @@
 import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
+import { useLayoutEffect } from "react";
 import { MEALS } from "../data/dummy-data";
 import MealDetails from "../components/MealDetails";
 import Subtitle from "../components/MealDetail/Subtitle";
 import List from "../components/MealDetail/List";
+import IconButton from "../components/IconButton";
 
 export default function MealDetailScreen({ route, navigation }) {
   const mealId = route.params.mealId;
@@ -10,6 +12,24 @@ export default function MealDetailScreen({ route, navigation }) {
   const meal = MEALS.filter((mealItem) => {
     return mealItem.id.indexOf(mealId) >= 0;
   });
+
+  function headerButtonPressHandler() {
+    console.log("Pressed");
+  }
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => {
+        return (
+          <IconButton
+            onPress={headerButtonPressHandler}
+            icon="star"
+            color="white"
+          />
+        );
+      },
+    });
+  }, [navigation, headerButtonPressHandler]);
 
   const selectedMeal = meal[0];
 
